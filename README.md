@@ -26,8 +26,9 @@ $ docker pull ghcr.io/akafeng/frrouting
 
 ```bash
 $ docker run -d \
-  --volume=/etc/swanctl/conf.d/:/etc/swanctl/conf.d/ \
+  --volume=/etc/frr/:/etc/frr/ \
   --cap-add=NET_ADMIN \
+  --cap-add=SYS_ADMIN \
   --network=host \
   --restart=unless-stopped \
   --name=frrouting \
