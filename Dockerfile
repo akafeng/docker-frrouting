@@ -8,6 +8,7 @@ RUN set -eux \
         curl \
         gnupg \
         lsb-release \
+        tini \
     && rm -rf /var/lib/apt/lists/* /var/log/*
 
 RUN set -eux \
@@ -22,6 +23,8 @@ RUN set -eux \
 RUN set -eux \
     && mkdir -p /var/run/frr \
     && chown -R frr:frr /var/run/frr
+
+ENTRYPOINT ["/usr/bin/tini", "--"]
 
 EXPOSE 179/tcp
 
