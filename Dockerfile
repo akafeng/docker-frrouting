@@ -7,15 +7,17 @@ RUN set -eux \
         apt-transport-https \
         curl \
         lsb-release \
-        tini \
     && rm -rf /var/lib/apt/lists/* /var/log/*
 RUN set -eux \
     && curl -s https://deb.frrouting.org/frr/keys.gpg | tee /usr/share/keyrings/frrouting.gpg > /dev/null \
     && echo "deb [signed-by=/usr/share/keyrings/frrouting.gpg] https://deb.frrouting.org/frr/ $(lsb_release -s -c) frr-stable" | tee -a /etc/apt/sources.list.d/frr.list \
     && apt-get update -qyy \
     && apt-get install -qyy --no-install-recommends --no-install-suggests \
+        tini \
         frr \
         frr-pythontools \
+        iputils-ping \
+        traceroute \
     && rm -rf /var/lib/apt/lists/* /var/log/*
 
 RUN set -eux \
